@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Networking;
 
-public class LookAtMouse : MonoBehaviour
+public class LookAtMouse : NetworkBehaviour
 {
     public float speed;
 
-    void FixedUpdate()
+    void Update()
     {
-
+        if(isLocalPlayer)
+        {
+            RotatePlayer();
+        }  
+    }
+    void RotatePlayer()
+    {
         Plane playerPlane = new Plane(Vector3.up, transform.position);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
